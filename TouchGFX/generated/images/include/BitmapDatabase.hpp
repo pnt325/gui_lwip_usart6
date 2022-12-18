@@ -6,6 +6,8 @@
 #include <touchgfx/hal/Types.hpp>
 #include <touchgfx/Bitmap.hpp>
 
+const uint16_t BITMAP_BLUE_BUTTONS_SQUARE_SMALL_ID = 0;
+const uint16_t BITMAP_BLUE_BUTTONS_SQUARE_SMALL_PRESSED_ID = 1;
 
 namespace BitmapDatabase
 {

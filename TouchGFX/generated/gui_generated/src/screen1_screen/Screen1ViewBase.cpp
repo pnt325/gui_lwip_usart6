@@ -4,9 +4,15 @@
 #include <gui_generated/screen1_screen/Screen1ViewBase.hpp>
 #include <touchgfx/Color.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
+#include <BitmapDatabase.hpp>
+#include <touchgfx/canvas_widget_renderer/CanvasWidgetRenderer.hpp>
 
-Screen1ViewBase::Screen1ViewBase()
+
+Screen1ViewBase::Screen1ViewBase() :
+    buttonCallback(this, &Screen1ViewBase::buttonCallbackHandler)
 {
+
+    touchgfx::CanvasWidgetRenderer::setupBuffer(canvasBuffer, CANVAS_BUFFER_SIZE);
 
     __background.setPosition(0, 0, 480, 272);
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
@@ -14,17 +20,102 @@ Screen1ViewBase::Screen1ViewBase()
     box1.setPosition(0, 0, 480, 272);
     box1.setColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
 
-    textArea1.setXY(204, 127);
+    textArea1.setXY(70, 237);
     textArea1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     textArea1.setLinespacing(0);
     textArea1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_H70Y));
 
+    textAreaUDP.setPosition(14, 8, 450, 19);
+    textAreaUDP.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textAreaUDP.setLinespacing(0);
+    textAreaUDPBuffer[0] = 0;
+    textAreaUDP.setWildcard(textAreaUDPBuffer);
+    textAreaUDP.setTypedText(touchgfx::TypedText(T___SINGLEUSE_0XHB));
+
+    textAreaUART.setPosition(5, 33, 450, 19);
+    textAreaUART.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textAreaUART.setLinespacing(0);
+    textAreaUARTBuffer[0] = 0;
+    textAreaUART.setWildcard(textAreaUARTBuffer);
+    textAreaUART.setTypedText(touchgfx::TypedText(T___SINGLEUSE_S0U1));
+
+    buttonWithLabel1.setXY(5, 57);
+    buttonWithLabel1.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_SQUARE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_SQUARE_SMALL_PRESSED_ID));
+    buttonWithLabel1.setLabelText(touchgfx::TypedText(T___SINGLEUSE_3X1Y));
+    buttonWithLabel1.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    buttonWithLabel1.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    buttonWithLabel1.setAction(buttonCallback);
+
+    circle1.setPosition(52, 145, 80, 80);
+    circle1.setCenter(40, 40);
+    circle1.setRadius(40);
+    circle1.setLineWidth(0);
+    circle1.setArc(0, 360);
+    circle1Painter.setColor(touchgfx::Color::getColorFromRGB(242, 0, 0));
+    circle1.setPainter(circle1Painter);
+
+    line1.setPosition(192, 160, 100, 50);
+    line1Painter.setColor(touchgfx::Color::getColorFromRGB(7, 23, 145));
+    line1.setPainter(line1Painter);
+    line1.setStart(5, 5);
+    line1.setEnd(95, 45);
+    line1.setLineWidth(2);
+    line1.setLineEndingStyle(touchgfx::Line::ROUND_CAP_ENDING);
+
+    shape1.setPosition(348, 145, 80, 80);
+    shape1.setOrigin(0.0f, 0.0f);
+    shape1.setScale(1.0f, 1.0f);
+    shape1.setAngle(0.0f);
+    shape1Painter.setColor(touchgfx::Color::getColorFromRGB(55, 255, 0));
+    shape1.setPainter(shape1Painter);
+    const touchgfx::AbstractShape::ShapePoint<float> shape1Points[4] = { { 40.0f, 0.0f }, { 80.0f, 40.0f }, { 40.0f, 80.0f }, { 0.0f, 40.0f } };
+    shape1.setShape(shape1Points);
+
+    textArea1_1.setXY(226, 237);
+    textArea1_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea1_1.setLinespacing(0);
+    textArea1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_Y942));
+
+    textArea1_1_1.setXY(360, 237);
+    textArea1_1_1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    textArea1_1_1.setLinespacing(0);
+    textArea1_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_A3BX));
+
     add(__background);
     add(box1);
     add(textArea1);
+    add(textAreaUDP);
+    add(textAreaUART);
+    add(buttonWithLabel1);
+    add(circle1);
+    add(line1);
+    add(shape1);
+    add(textArea1_1);
+    add(textArea1_1_1);
 }
 
 void Screen1ViewBase::setupScreen()
 {
 
+}
+
+//Handles tick based events
+void Screen1ViewBase::handleTickEvent()
+{
+    //interval_update
+    //When every N tick call virtual function
+    //Call interval_update
+    interval_update();
+
+}
+
+void Screen1ViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
+{
+    if (&src == &buttonWithLabel1)
+    {
+        //btn_send_uart_click
+        //When buttonWithLabel1 clicked call virtual function
+        //Call btn_send_uart_click
+        btn_send_uart_click();
+    }
 }

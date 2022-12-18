@@ -11,6 +11,8 @@ public:
     virtual ~Screen1View() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
+    virtual void interval_update();
+    virtual void btn_send_uart_click();
 protected:
 };
 

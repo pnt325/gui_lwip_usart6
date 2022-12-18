@@ -6,8 +6,23 @@
   <Texts>
     <TextGroup Id="Group1" />
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_A3BX" Alignment="Left" TypographyId="Small">
+        <Translation Language="GB">Square</Translation>
+      </Text>
+      <Text Id="__SingleUse_Y942" Alignment="Left" TypographyId="Small">
+        <Translation Language="GB">Line</Translation>
+      </Text>
+      <Text Id="__SingleUse_3X1Y" Alignment="Center" TypographyId="Small">
+        <Translation Language="GB">Send UART "a"</Translation>
+      </Text>
+      <Text Id="__SingleUse_S0U1" Alignment="Left" TypographyId="Small">
+        <Translation Language="GB">UART Received:&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_0XHB" Alignment="Left" TypographyId="Small">
+        <Translation Language="GB">UDP Received:&lt;value&gt;</Translation>
+      </Text>
       <Text Id="__SingleUse_H70Y" Alignment="Left" TypographyId="Small">
-        <Translation Language="GB">Hello world</Translation>
+        <Translation Language="GB">Circle</Translation>
       </Text>
     </TextGroup>
   </Texts>

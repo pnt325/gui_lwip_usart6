@@ -3,6 +3,7 @@
     "Screens": [
       {
         "Name": "Screen1",
+        "CanvasBufferSize": 7200,
         "Components": [
           {
             "Type": "Box",
@@ -18,16 +19,177 @@
           {
             "Type": "TextArea",
             "Name": "textArea1",
-            "X": 204,
-            "Y": 127,
-            "Width": 89,
+            "X": 70,
+            "Y": 237,
+            "Width": 45,
             "Height": 19,
             "TextId": "__SingleUse_H70Y",
             "TextRotation": "0",
             "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textAreaUDP",
+            "X": 14,
+            "Y": 8,
+            "Width": 450,
+            "Height": 19,
+            "TextId": "__SingleUse_0XHB",
+            "TextRotation": "0",
+            "Wildcard1": {
+              "UseBuffer": true,
+              "BufferSize": 32
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textAreaUART",
+            "X": 5,
+            "Y": 33,
+            "Width": 450,
+            "Height": 19,
+            "TextId": "__SingleUse_S0U1",
+            "TextRotation": "0",
+            "Wildcard1": {
+              "UseBuffer": true,
+              "BufferSize": 32
+            }
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "buttonWithLabel1",
+            "X": 5,
+            "Y": 57,
+            "Width": 170,
+            "Height": 60,
+            "Pressed": "__designer\\Blue_Buttons_Square_small_pressed.png",
+            "Released": "__designer\\Blue_Buttons_Square_small.png",
+            "TextId": "__SingleUse_3X1Y",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0",
+            "Style": "Style12"
+          },
+          {
+            "Type": "Circle",
+            "Name": "circle1",
+            "X": 52,
+            "Y": 145,
+            "Width": 80,
+            "Height": 80,
+            "Color": {
+              "Red": 242
+            },
+            "CenterX": 40.0,
+            "CenterY": 40.0,
+            "Radius": 40.0,
+            "EndAngle": 360.0,
+            "CapPrecision": "Butt"
+          },
+          {
+            "Type": "Line",
+            "Name": "line1",
+            "X": 192,
+            "Y": 160,
+            "Width": 100,
+            "Height": 50,
+            "Color": {
+              "Red": 7,
+              "Green": 23,
+              "Blue": 145
+            },
+            "StartX": 5.0,
+            "StartY": 5.0,
+            "EndX": 95.0,
+            "EndY": 45.0,
+            "LineWidth": 2.0,
+            "LineEndingStyle": "Round"
+          },
+          {
+            "Type": "Shape",
+            "Name": "shape1",
+            "X": 348,
+            "Y": 145,
+            "Width": 80,
+            "Height": 80,
+            "Color": {
+              "Red": 55,
+              "Green": 255
+            },
+            "Points": [
+              {
+                "X": 40.0
+              },
+              {
+                "X": 80.0,
+                "Y": 40.0
+              },
+              {
+                "X": 40.0,
+                "Y": 80.0
+              },
+              {
+                "Y": 40.0
+              }
+            ],
+            "XScale": 1.0,
+            "YScale": 1.0
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_1",
+            "X": 226,
+            "Y": 237,
+            "Width": 33,
+            "Height": 19,
+            "TextId": "__SingleUse_Y942",
+            "TextRotation": "0",
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea1_1_1",
+            "X": 360,
+            "Y": 237,
+            "Width": 57,
+            "Height": 19,
+            "TextId": "__SingleUse_A3BX",
+            "TextRotation": "0",
+            "AutoSize": true
           }
         ],
-        "Interactions": []
+        "Interactions": [
+          {
+            "InteractionName": "btn_send_uart_click",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "buttonWithLabel1"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "btn_send_uart_click"
+            }
+          },
+          {
+            "InteractionName": "interval_update",
+            "Trigger": {
+              "Type": "TriggerOnEveryTick",
+              "TickCount": 1
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "interval_update"
+            }
+          }
+        ]
       }
     ],
     "CustomContainerDefinitions": [],

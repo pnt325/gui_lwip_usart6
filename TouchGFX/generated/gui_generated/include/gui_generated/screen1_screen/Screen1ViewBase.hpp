@@ -9,6 +9,12 @@
 #include <gui/screen1_screen/Screen1Presenter.hpp>
 #include <touchgfx/widgets/Box.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
+#include <touchgfx/widgets/TextAreaWithWildcard.hpp>
+#include <touchgfx/widgets/ButtonWithLabel.hpp>
+#include <touchgfx/widgets/canvas/Circle.hpp>
+#include <touchgfx/widgets/canvas/PainterRGB565.hpp>
+#include <touchgfx/widgets/canvas/Line.hpp>
+#include <touchgfx/widgets/canvas/Shape.hpp>
 
 class Screen1ViewBase : public touchgfx::View<Screen1Presenter>
 {
@@ -16,6 +22,20 @@ public:
     Screen1ViewBase();
     virtual ~Screen1ViewBase() {}
     virtual void setupScreen();
+    virtual void handleTickEvent();
+
+    /*
+     * Virtual Action Handlers
+     */
+    virtual void btn_send_uart_click()
+    {
+        // Override and implement this function in Screen1
+    }
+
+    virtual void interval_update()
+    {
+        // Override and implement this function in Screen1
+    }
 
 protected:
     FrontendApplication& application() {
@@ -28,9 +48,43 @@ protected:
     touchgfx::Box __background;
     touchgfx::Box box1;
     touchgfx::TextArea textArea1;
+    touchgfx::TextAreaWithOneWildcard textAreaUDP;
+    touchgfx::TextAreaWithOneWildcard textAreaUART;
+    touchgfx::ButtonWithLabel buttonWithLabel1;
+    touchgfx::Circle circle1;
+    touchgfx::PainterRGB565 circle1Painter;
+    touchgfx::Line line1;
+    touchgfx::PainterRGB565 line1Painter;
+    touchgfx::Shape<4> shape1;
+    touchgfx::PainterRGB565 shape1Painter;
+    touchgfx::TextArea textArea1_1;
+    touchgfx::TextArea textArea1_1_1;
+
+    /*
+     * Wildcard Buffers
+     */
+    static const uint16_t TEXTAREAUDP_SIZE = 32;
+    touchgfx::Unicode::UnicodeChar textAreaUDPBuffer[TEXTAREAUDP_SIZE];
+    static const uint16_t TEXTAREAUART_SIZE = 32;
+    touchgfx::Unicode::UnicodeChar textAreaUARTBuffer[TEXTAREAUART_SIZE];
 
 private:
 
+    /*
+     * Callback Declarations
+     */
+    touchgfx::Callback<Screen1ViewBase, const touchgfx::AbstractButton&> buttonCallback;
+
+    /*
+     * Callback Handler Declarations
+     */
+    void buttonCallbackHandler(const touchgfx::AbstractButton& src);
+
+    /*
+     * Canvas Buffer Size
+     */
+    static const uint16_t CANVAS_BUFFER_SIZE = 7200;
+    uint8_t canvasBuffer[CANVAS_BUFFER_SIZE];
 };
 
 #endif // SCREEN1VIEWBASE_HPP

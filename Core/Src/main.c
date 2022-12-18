@@ -122,7 +122,9 @@ extern void videoTaskFunc(void *argument);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+uint8_t uart_recv;
+uint8_t uart_send;
+uint8_t uart_send_trigger;
 /* USER CODE END 0 */
 
 /**
@@ -172,7 +174,7 @@ int main(void)
   MX_USART6_UART_Init();
   MX_TouchGFX_Init();
   /* USER CODE BEGIN 2 */
-
+  HAL_UART_Receive_IT(&huart6, &uart_recv, 1);
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -695,7 +697,13 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	if(huart == &huart6)
+	{
+		HAL_UART_Receive_IT(&huart6, &uart_recv, 1);
+	}
+}
 /* USER CODE END 4 */
 
 /* USER CODE BEGIN Header_StartDefaultTask */
@@ -712,10 +720,14 @@ void StartDefaultTask(void *argument)
   /* USER CODE BEGIN 5 */
   udpserver_init();
   /* Infinite loop */
-  for(;;)
-  {
-    osDelay(100);
-  }
+	for (;;) {
+		if (uart_send_trigger) {
+			uart_send_trigger = 0;
+			uart_send = 'a';
+			HAL_UART_Transmit_IT(&huart6, &uart_send, 1);
+		}
+		osDelay(10);
+	}
   /* USER CODE END 5 */
 }
 
