@@ -65,7 +65,7 @@ static void udp_thread(void *arg)
 					//osMessageQueuePut(send_queueHandle, msg,0, 1000);
 
 					// Or modify the message received, so that we can send it back to the client
-					int len = sprintf (smsg, "\"%s\" was sent by the Client\n", (char *) buf->p->payload);
+					int len = sprintf (smsg, "Received:\"%s\"\r\n", (char *) buf->p->payload);
 
 					/* allocate pbuf from RAM*/
 					txBuf = pbuf_alloc(PBUF_TRANSPORT,len, PBUF_RAM);
