@@ -24,10 +24,10 @@
  * GPIO_ID Enum
  * The signals represented by this enum are used by TouchGFX framework to signal internal events.
  *
- * VSYNC_FREQ,  /// Pin PB4(D3) is toggled at each VSYNC
- * RENDER_TIME, /// Pin PC6(D1) is high when frame rendering begins, low when finished
- * FRAME_RATE,  /// Pin PC7(D0) is toggled when the frame buffers are swapped.
- * MCU_ACTIVE   /// Pin PG6(D2) is high when framework is utilizing the MCU.
+ * VSYNC_FREQ,  /// Pin is toggled at each VSYNC
+ * RENDER_TIME, /// Pin is high when frame rendering begins, low when finished
+ * FRAME_RATE,  /// Pin is toggled when the frame buffers are swapped.
+ * MCU_ACTIVE   /// Pin is high when framework is utilizing the MCU.
  *
  * Configure GPIO's with the same name as the GPIO_IDs above, as output, in CubeMX to export
  * the signals for performance measuring. See support.touchgfx.com for further details.

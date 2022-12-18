@@ -64,7 +64,7 @@ public:
         mutexBuffers = MUTEX_CREATE();
     }
 
-    Handle registerVideoWidget(touchgfx::VideoWidget& widget)
+    virtual Handle registerVideoWidget(touchgfx::VideoWidget& widget)
     {
         // Running in UI thread
 
@@ -97,7 +97,7 @@ public:
         return handle;
     }
 
-    void unregisterVideoWidget(const Handle handle)
+    virtual void unregisterVideoWidget(const Handle handle)
     {
         // Running in UI thread
 
@@ -117,14 +117,14 @@ public:
         }
     }
 
-    uint32_t getCurrentFrameNumber(const Handle handle)
+    virtual uint32_t getCurrentFrameNumber(const Handle handle)
     {
         assert(handle < no_streams);
         const Stream& stream = streams[handle];
         return stream.frameNumberShown;
     }
 
-    void setFrameRate(const Handle handle, uint32_t ui_frames, uint32_t video_frames)
+    virtual void setFrameRate(const Handle handle, uint32_t ui_frames, uint32_t video_frames)
     {
         // Running in UI thread
 
@@ -140,7 +140,7 @@ public:
         stream.frame_rate_video = video_frames;
     }
 
-    void setVideoData(const Handle handle, const uint8_t* movie, const uint32_t length)
+    virtual void setVideoData(const Handle handle, const uint8_t* movie, const uint32_t length)
     {
         // Running in UI thread
 
@@ -149,7 +149,7 @@ public:
         clearState(handle);
     }
 
-    void setVideoData(const Handle handle, VideoDataReader& reader)
+    virtual void setVideoData(const Handle handle, VideoDataReader& reader)
     {
         // Running in UI thread
         mjpegDecoders[handle]->setVideoData(reader);
@@ -157,7 +157,7 @@ public:
         clearState(handle);
     }
 
-    void setCommand(const Handle handle, Command cmd, uint32_t param)
+    virtual void setCommand(const Handle handle, Command cmd, uint32_t param)
     {
         // Running in UI thread
 
@@ -177,14 +177,14 @@ public:
                 stream.frameCount = 0;
                 stream.tickCount = 0;
                 // Seek to start of video if stopped
-                if (stream.isStopped)
+                if(stream.isStopped)
                 {
                     stream.seek_to_frame = 1;
                 }
                 stream.isStopped = false;
                 // Kick decoder if next buffer is available
                 stream.skip_frames = 0;
-                if (stream.nextBuffer == 0)
+                if(stream.nextBuffer == 0)
                 {
                     stream.doDecodeNewFrame = true;
                     SEM_POST(semDecode);
@@ -224,7 +224,7 @@ public:
      * Update frame counters.
      * Decide if widget should be invalidated.
      */
-    bool updateFrame(const Handle handle, touchgfx::VideoWidget& widget)
+    virtual bool updateFrame(const Handle handle, touchgfx::VideoWidget& widget)
     {
         // Running in UI thread
 
@@ -234,7 +234,7 @@ public:
         // Increase tickCount if playing
         if (stream.isPlaying)
         {
-            stream.tickCount += HAL::getInstance()->getLCDRefreshCount();
+            stream.tickCount+=HAL::getInstance()->getLCDRefreshCount();
         }
 
         // Assume more frames are available, flag is lowered once, when changing to the last frame
@@ -246,12 +246,12 @@ public:
             MUTEX_LOCK(mutexBuffers);
 
             // Do nothing if seek to frame
-            if (stream.seek_to_frame > 0)
+            if(stream.seek_to_frame > 0)
             {
                 stream.nextBuffer = 0;
             }
 
-            if (stream.nextBuffer != 0)
+            if(stream.nextBuffer != 0)
             {
                 // Use nextBuffer as current
                 stream.currentBuffer = stream.nextBuffer;
@@ -286,7 +286,7 @@ public:
         return hasMoreFrames;
     }
 
-    void draw(const Handle handle, const touchgfx::Rect& invalidatedArea, const touchgfx::VideoWidget& widget)
+    virtual void draw(const Handle handle, const touchgfx::Rect& invalidatedArea, const touchgfx::VideoWidget& widget)
     {
         // Running in UI thread
 
@@ -396,13 +396,13 @@ public:
         }
     }
 
-    void getVideoInformation(const Handle handle, touchgfx::VideoInformation* data)
+    virtual void getVideoInformation(const Handle handle, touchgfx::VideoInformation* data)
     {
         assert(handle < no_streams);
         mjpegDecoders[handle]->getVideoInfo(data);
     }
 
-    bool getIsPlaying(const Handle handle)
+    virtual bool getIsPlaying(const Handle handle)
     {
         assert(handle < no_streams);
         Stream& stream = streams[handle];
