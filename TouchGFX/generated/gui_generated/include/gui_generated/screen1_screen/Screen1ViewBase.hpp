@@ -37,6 +37,11 @@ public:
         // Override and implement this function in Screen1
     }
 
+    virtual void btn_udp_send_click()
+    {
+        // Override and implement this function in Screen1
+    }
+
 protected:
     FrontendApplication& application() {
         return *static_cast<FrontendApplication*>(touchgfx::Application::getInstance());
@@ -59,6 +64,7 @@ protected:
     touchgfx::PainterRGB565 shape1Painter;
     touchgfx::TextArea textArea1_1;
     touchgfx::TextArea textArea1_1_1;
+    touchgfx::ButtonWithLabel buttonWithLabel1_1;
 
     /*
      * Wildcard Buffers

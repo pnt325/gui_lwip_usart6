@@ -39,7 +39,7 @@ Screen1ViewBase::Screen1ViewBase() :
     textAreaUART.setWildcard(textAreaUARTBuffer);
     textAreaUART.setTypedText(touchgfx::TypedText(T___SINGLEUSE_S0U1));
 
-    buttonWithLabel1.setXY(5, 57);
+    buttonWithLabel1.setXY(20, 61);
     buttonWithLabel1.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_SQUARE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_SQUARE_SMALL_PRESSED_ID));
     buttonWithLabel1.setLabelText(touchgfx::TypedText(T___SINGLEUSE_3X1Y));
     buttonWithLabel1.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
@@ -81,6 +81,13 @@ Screen1ViewBase::Screen1ViewBase() :
     textArea1_1_1.setLinespacing(0);
     textArea1_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_A3BX));
 
+    buttonWithLabel1_1.setXY(290, 61);
+    buttonWithLabel1_1.setBitmaps(touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_SQUARE_SMALL_ID), touchgfx::Bitmap(BITMAP_BLUE_BUTTONS_SQUARE_SMALL_PRESSED_ID));
+    buttonWithLabel1_1.setLabelText(touchgfx::TypedText(T___SINGLEUSE_TF87));
+    buttonWithLabel1_1.setLabelColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    buttonWithLabel1_1.setLabelColorPressed(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    buttonWithLabel1_1.setAction(buttonCallback);
+
     add(__background);
     add(box1);
     add(textArea1);
@@ -92,6 +99,7 @@ Screen1ViewBase::Screen1ViewBase() :
     add(shape1);
     add(textArea1_1);
     add(textArea1_1_1);
+    add(buttonWithLabel1_1);
 }
 
 void Screen1ViewBase::setupScreen()
@@ -117,5 +125,12 @@ void Screen1ViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
         //When buttonWithLabel1 clicked call virtual function
         //Call btn_send_uart_click
         btn_send_uart_click();
+    }
+    else if (&src == &buttonWithLabel1_1)
+    {
+        //btn_udp_send_click
+        //When buttonWithLabel1_1 clicked call virtual function
+        //Call btn_udp_send_click
+        btn_udp_send_click();
     }
 }

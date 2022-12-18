@@ -125,6 +125,7 @@ extern void videoTaskFunc(void *argument);
 uint8_t uart_recv;
 uint8_t uart_send;
 uint8_t uart_send_trigger;
+uint8_t udp_send_trigger;
 /* USER CODE END 0 */
 
 /**
@@ -726,7 +727,14 @@ void StartDefaultTask(void *argument)
 			uart_send = 'a';
 			HAL_UART_Transmit_IT(&huart6, &uart_send, 1);
 		}
-		osDelay(10);
+
+		if(udp_send_trigger)
+		{
+			udp_send_trigger = 0;
+			udpsend(0);
+		}
+
+		osDelay(5);
 	}
   /* USER CODE END 5 */
 }

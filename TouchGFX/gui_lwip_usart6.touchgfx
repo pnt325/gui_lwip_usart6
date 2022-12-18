@@ -58,8 +58,8 @@
           {
             "Type": "ButtonWithLabel",
             "Name": "buttonWithLabel1",
-            "X": 5,
-            "Y": 57,
+            "X": 20,
+            "Y": 61,
             "Width": 170,
             "Height": 60,
             "Pressed": "__designer\\Blue_Buttons_Square_small_pressed.png",
@@ -164,6 +164,29 @@
             "TextId": "__SingleUse_A3BX",
             "TextRotation": "0",
             "AutoSize": true
+          },
+          {
+            "Type": "ButtonWithLabel",
+            "Name": "buttonWithLabel1_1",
+            "X": 290,
+            "Y": 61,
+            "Width": 170,
+            "Height": 60,
+            "Pressed": "__designer\\Blue_Buttons_Square_small_pressed.png",
+            "Released": "__designer\\Blue_Buttons_Square_small.png",
+            "TextId": "__SingleUse_TF87",
+            "ReleasedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "PressedColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "TextRotation": "0",
+            "Style": "Style12"
           }
         ],
         "Interactions": [
@@ -187,6 +210,17 @@
             "Action": {
               "Type": "ActionCustom",
               "FunctionName": "interval_update"
+            }
+          },
+          {
+            "InteractionName": "btn_udp_send_click",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "buttonWithLabel1_1"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "btn_udp_send_click"
             }
           }
         ]

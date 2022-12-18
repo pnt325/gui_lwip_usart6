@@ -13,6 +13,7 @@ public:
     virtual void tearDownScreen();
     virtual void interval_update();
     virtual void btn_send_uart_click();
+    virtual void btn_udp_send_click();
 protected:
 };
 

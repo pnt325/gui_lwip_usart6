@@ -4,6 +4,7 @@ extern char msg_udp[128];
 extern int msg_udp_ready;
 extern uint8_t uart_recv;
 uint8_t old_uart_recv;
+extern uint8_t udp_send_trigger;
 
 extern uint8_t uart_send;
 extern uint8_t uart_send_trigger;
@@ -49,4 +50,9 @@ void Screen1View::btn_send_uart_click()
 {
 	uart_send = 'a';
 	uart_send_trigger = 1;
+}
+
+void Screen1View::btn_udp_send_click()
+{
+	udp_send_trigger = 1;
 }

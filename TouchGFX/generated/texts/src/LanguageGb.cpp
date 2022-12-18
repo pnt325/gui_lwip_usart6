@@ -10,10 +10,11 @@ KEEP extern const uint32_t indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE;
 // Remap all strings
 TEXT_LOCATION_FLASH_PRAGMA
 KEEP extern const uint32_t indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE = {
-    52, // T___SINGLEUSE_A3BX: "Square"
-    59, // T___SINGLEUSE_Y942: "Line"
-    31, // T___SINGLEUSE_3X1Y: "Send UART "a""
-    0,  // T___SINGLEUSE_S0U1: "UART Received:<>"
-    16, // T___SINGLEUSE_0XHB: "UDP Received:<>"
-    45  // T___SINGLEUSE_H70Y: "Circle"
+    0,  // T___SINGLEUSE_TF87: "Send UDP\n"Hello world""
+    75, // T___SINGLEUSE_A3BX: "Square"
+    82, // T___SINGLEUSE_Y942: "Line"
+    54, // T___SINGLEUSE_3X1Y: "Send UART "a""
+    23, // T___SINGLEUSE_S0U1: "UART Received:<>"
+    39, // T___SINGLEUSE_0XHB: "UDP Received:<>"
+    68  // T___SINGLEUSE_H70Y: "Circle"
 };

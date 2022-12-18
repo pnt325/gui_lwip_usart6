@@ -18,7 +18,7 @@
 
 static struct netconn *conn;
 static struct netbuf *buf;
-static ip_addr_t *addr;
+static ip_addr_t addr;
 static unsigned short port;
 char msg[128];
 char smsg[200];
@@ -52,7 +52,7 @@ static void udp_thread(void *arg)
 
 				if (recv_err == ERR_OK) // if the data is received
 				{
-					addr = netbuf_fromaddr(buf);  // get the address of the client
+					addr = *netbuf_fromaddr(buf);  // get the address of the client
 					port = netbuf_fromport(buf);  // get the Port of the client
 					strcpy (msg, buf->p->payload);   // get the message from the client
 
@@ -76,7 +76,7 @@ static void udp_thread(void *arg)
 					// refer the nebuf->pbuf to our pbuf
 					buf->p = txBuf;
 
-					netconn_connect(conn, addr, port);  // connect to the destination address and port
+					netconn_connect(conn, &addr, port);  // connect to the destination address and port
 
 					netconn_send(conn,buf);  // send the netbuf to the client
 
@@ -97,4 +97,16 @@ static void udp_thread(void *arg)
 void udpserver_init(void)
 {
   sys_thread_new("udp_thread", udp_thread, NULL, DEFAULT_THREAD_STACKSIZE,osPriorityNormal);
+}
+
+void udpsend(const char* msg)
+{
+    struct netbuf *_buf;
+    ip_addr_t _addr;
+    char text[] = "Hello world\r\n";
+
+	_buf = netbuf_new();   					// Create a new netbuf
+	netbuf_ref(_buf, text, strlen(text));  	// refer the netbuf to the data to be sent
+	netconn_send(conn,_buf);  				// send the netbuf to the client
+	netbuf_delete(_buf);  					// delete the netbuf
 }

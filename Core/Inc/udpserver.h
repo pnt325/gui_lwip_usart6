@@ -10,6 +10,6 @@
 
 
 void udpserver_init(void);
-
+void udpsend(const char* msg);
 
 #endif /* INC_UDPSERVER_H_ */
